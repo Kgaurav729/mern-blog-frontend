@@ -6,7 +6,6 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Navbar from './components/Navbar';
 import EditBlog from './pages/EditBlog';
-import Layout from './components/Layout';
 import { Toaster } from 'react-hot-toast';
 
 function App() {
