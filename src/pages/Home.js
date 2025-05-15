@@ -30,6 +30,7 @@ const Home = () => {
   };
 
   useEffect(() => {
+    // console.log(user)
     if (user) fetchBlogs();
   }, [user]);
 

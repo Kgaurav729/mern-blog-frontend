@@ -70,7 +70,7 @@ const Navbar = () => {
           Home
         </Link>
 
-        {user ? (
+        {user && user.token ? (
           <>
             <Link
               to="/create"
@@ -79,7 +79,8 @@ const Navbar = () => {
               Create Blog
             </Link>
             <span className="text-sm text-gray-600 dark:text-gray-300">
-              Hi, <span className="font-semibold">{user.user.name}</span>
+              Hi, <span className="font-semibold">{user?.user?.name || user?.name || 'User'}</span>
+              {/* {user.user.name} */}
             </span>
             <button
               onClick={logout}
