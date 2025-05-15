@@ -1,104 +1,56 @@
-// import React, { useState, useContext } from 'react';
-// import API from '../api/axios';
-// import { useNavigate } from 'react-router-dom';
-// import { AuthContext } from '../context/AuthContext';
-// import toast from 'react-hot-toast';
-
-// const Login = () => {
-//   const [form, setForm] = useState({ email: '', password: '' });
-//   const [error, setError] = useState('');
-//   const { login } = useContext(AuthContext);
-//   const navigate = useNavigate();
-
-//   const handleChange = (e) =>
-//     setForm({ ...form, [e.target.name]: e.target.value });
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     try {
-//       const res = await API.post('/auth/login', form);
-//       login(res.data); // Save user & token to context
-//       navigate('/');
-//       toast.success('Succes Login!');
-//     } catch (err) {
-//       setError(err.response?.data?.message || 'Login failed');
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <h2>Login</h2>
-//       {error && <p style={{ color: 'red' }}>{error}</p>}
-//       <form onSubmit={handleSubmit}>
-//         <input name="email" type="email" placeholder="Email" onChange={handleChange} required />
-//         <input name="password" type="password" placeholder="Password" onChange={handleChange} required />
-//         <button type="submit">Login</button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default Login;
-
-
-import React, { useState, useContext } from 'react';
-import API from '../api/axios';
-import { useNavigate } from 'react-router-dom';
+import { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import API from '../api/axios';
 
 const Login = () => {
-  const [form, setForm] = useState({ email: '', password: '' });
-  const [error, setError] = useState('');
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleChange = (e) =>
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await API.post('/auth/login', form);
-      login(res.data); // Save user & token to context
-      navigate('/');
+      const res = await API.post('/auth/login', { email, password });
+      login(res.data);
       toast.success('Login successful!');
+      navigate('/');
     } catch (err) {
-      setError(err.response?.data?.message || 'Login failed');
+      toast.error(err.response?.data?.message || 'Login failed');
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50 px-4">
-      <div className="bg-white shadow-md rounded-lg p-8 max-w-sm w-full">
-        <h2 className="text-2xl font-bold mb-6 text-center text-blue-600">Login</h2>
-
-        {error && (
-          <div className="mb-4 text-sm text-red-600 bg-red-50 border border-red-200 p-2 rounded">
-            {error}
-          </div>
-        )}
-
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 px-4">
+      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 w-full max-w-md">
+        <h2 className="text-3xl font-bold text-center mb-6 text-blue-700 dark:text-blue-300">Login</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            name="email"
-            type="email"
-            placeholder="Email"
-            onChange={handleChange}
-            required
-            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200"
-          />
-          <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            onChange={handleChange}
-            required
-            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200"
-          />
+          <div>
+            <label className="block mb-1 text-gray-700 dark:text-gray-300">Email</label>
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-blue-400 transition"
+            />
+          </div>
+          <div>
+            <label className="block mb-1 text-gray-700 dark:text-gray-300">Password</label>
+            <input
+              type="password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-blue-400 transition"
+            />
+          </div>
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition shadow"
           >
             Login
           </button>
@@ -109,3 +61,4 @@ const Login = () => {
 };
 
 export default Login;
+
