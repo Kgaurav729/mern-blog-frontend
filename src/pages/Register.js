@@ -15,7 +15,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await API.post('/auth/register', { name, email, password });
+      const res = await API.post('/auth/signup', { name, email, password });
       login(res.data);
       toast.success('Registered successfully!');
       navigate('/');
@@ -27,7 +27,7 @@ const Register = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 px-4">
       <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 w-full max-w-md">
-        <h2 className="text-3xl font-bold text-center mb-6 text-blue-700 dark:text-blue-300">Register</h2>
+        <h2 className="text-3xl font-bold text-center mb-6 text-blue-700 dark:text-blue-300">Sign Up</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block mb-1 text-gray-700 dark:text-gray-300">Name</label>
@@ -63,7 +63,7 @@ const Register = () => {
             type="submit"
             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition shadow"
           >
-            Register
+            Sign Up
           </button>
         </form>
       </div>
