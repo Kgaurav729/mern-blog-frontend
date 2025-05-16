@@ -1,4 +1,3 @@
-// src/components/ThemeToggle.js
 import { useContext } from 'react';
 import { ThemeContext } from '../context/ThemeContext';
 

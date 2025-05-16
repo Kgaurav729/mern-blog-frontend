@@ -17,21 +17,17 @@ code {
 @tailwind utilities;
 
 
-/* src/index.css */
 :root {
   --background-color: #ffffff;
   --text-color: #000000;
-  /* Add other variables as needed */
 }
 
 .dark {
   --background-color: #121212;
   --text-color: #ffffff;
-  /* Add other variables as needed */
 }
 
 body {
   background-color: var(--background-color);
   color: var(--text-color);
-  /* Apply other styles using variables */
 }
